@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import { videos } from "@/data/video";
+import router from "@/router";
+import { ref } from "vue";
+
+const movies = ref(videos);
+
+function videoDetail(id: number) {
+  router.push({ name: "videoDetail", params: { videoId: id } });
+}
 </script>
 
 <template>
@@ -7,7 +15,7 @@ import { videos } from "@/data/video";
     <input type="search" />
     <button>検索</button>
 
-    <div v-for="video in videos" :key="video.id">
+    <div v-for="video in movies" :key="video.id" @click="videoDetail(video.id)">
       <img :src="video.thumnails.url" />
       <div>{{ video.title }}</div>
     </div>
